@@ -90,6 +90,41 @@ class LinkedList {
         }
     }
 
+    void reverselist() {
+
+        Node* prevnode = getNewNode();
+        Node* currentnode = getNewNode();
+        Node* nextnode = getNewNode();        
+
+        if(root == NULL) {
+            std::cout<<"List is empty";
+            return;
+        }
+        
+        if(root->next == NULL) {
+            return;
+        }
+
+        prevnode = root;
+        currentnode = prevnode->next;
+        nextnode = currentnode->next;
+
+        while(nextnode != NULL) {
+            currentnode->next = prevnode;
+            prevnode = currentnode;
+            currentnode = nextnode;
+            nextnode = nextnode->next;            
+        }
+        currentnode->next = prevnode;
+        root->next = NULL;
+        root = currentnode;
+
+    }
+
+    void reverselistwithrecursion() {
+        
+    }
+
     void print() {
         Node* temp = getNewNode(); 
         temp = root;
@@ -98,10 +133,11 @@ class LinkedList {
             std::cout<<"\n";
             return;
         }
-        while(temp != NULL){
+        while(temp->next != NULL){
             std::cout<<temp->data<<"\n";
             temp = temp->next;
         }
+        std::cout<<temp->data<<"\n";
         std::cout<<"\n";
     }
 
@@ -119,7 +155,8 @@ int main() {
     list.print();
     list.insert(3,3);
     list.print();  
-
+    list.reverselist();
+    list.print();  
     return 0;
 
 }
